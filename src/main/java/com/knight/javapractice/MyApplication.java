@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.knight.javapractice.mapper"})
+@MapperScan(basePackages = { "com.knight.javapractice.mapper" })
 public class MyApplication {
 
 	public static void main(String[] args) {

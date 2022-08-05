@@ -1,6 +1,7 @@
 -- // create user table
 -- Migration SQL that makes the change goes here.
 -- Table Definition
+
 CREATE TABLE IF NOT EXISTS users (
     id bigint UNSIGNED AUTO_INCREMENT,
     username text COMMENT '用户登录名' ,

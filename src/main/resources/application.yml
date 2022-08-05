@@ -19,11 +19,6 @@ spring:
     restart:
       enabled: true
 
-  security:
-    user:
-      name: knight
-      password: 123456
-
   redis:
     host: localhost
     database: 0
