@@ -1,0 +1,75 @@
+debug: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/java
+    username: root
+    password: 123
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: SpringBootHikariCP
+      max-lifetime: 60000
+      connection-timeout: 30000
+
+  devtools:
+    restart:
+      enabled: true
+
+  security:
+    user:
+      name: knight
+      password: 123456
+
+  redis:
+    host: localhost
+    database: 0
+    port: 6379
+    password:
+    timeout: 1000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+  cache:
+    type: redis
+
+  flyway:
+    enabled: true
+    encoding: UTF-8
+    locations: classpath:db/migration
+    sql-migration-prefix: V
+    sql-migration-separator: __
+    sql-migration-suffixes: .sql
+    validate-on-migrate: true
+    baseline-on-migrate: true
+
+  task:
+    execution:
+      pool:
+        max-size: 16
+        core-size: 16
+        keep-alive: 10s
+        queue-capacity: 100
+        allow-core-thread-timeout: true
+      thread-name-prefix: async-task-
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.knight.javapractice.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
