@@ -13,7 +13,7 @@ import com.knight.javapractice.entity.User;
 @Component
 public interface UserMapper {
 
-  @Select("SELECT id, username, created_at, updated_at FROM users")
+  @Select("SELECT * FROM users")
   List<User> findAll();
 
   @Select("SELECT * FROM users WHERE id = #{id}")
