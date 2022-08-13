@@ -1,4 +1,4 @@
-package com.knight.javapractice;
+package com.knight.javaPractice;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableAsync
 @SpringBootApplication
-@MapperScan(basePackages = { "com.knight.javapractice.mapper" })
+@MapperScan(basePackages = { "com.knight.javaPractice.mapper" })
 public class MyApplication {
 
 	public static void main(String[] args) {

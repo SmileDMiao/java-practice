@@ -1,4 +1,4 @@
-package com.knight.javapractice.helper;
+package com.knight.javaPractice.helper;
 
 public enum ReturnCode {
 

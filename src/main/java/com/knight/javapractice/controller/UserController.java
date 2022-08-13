@@ -1,4 +1,4 @@
-package com.knight.javapractice.controller;
+package com.knight.javaPractice.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.knight.javapractice.entity.User;
-import com.knight.javapractice.helper.ResultData;
-import com.knight.javapractice.service.UserService;
+import com.knight.javaPractice.entity.User;
+import com.knight.javaPractice.helper.ResultData;
+import com.knight.javaPractice.repository.UserRepository;
+import com.knight.javaPractice.service.UserService;
 
 @RestController
 @RequestMapping("/users")
@@ -28,7 +29,7 @@ public class UserController {
 
     @GetMapping()
     public ResultData<List<User>> findAll() {
-        List<User> users = new ArrayList<User>();
+        List<User> users;
         users = userService.findAll();
 
         return ResultData.success(users);

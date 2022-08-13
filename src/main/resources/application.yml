@@ -1,6 +1,9 @@
-debug: true
+debug: false
 
 spring:
+  application:
+    name: JavaPractice
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/java
@@ -14,6 +17,15 @@ spring:
       pool-name: SpringBootHikariCP
       max-lifetime: 60000
       connection-timeout: 30000
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57InnoDBDialect
+    open-in-view: true
 
   devtools:
     restart:
@@ -56,7 +68,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.knight.javapractice.entity
+  type-aliases-package: com.knight.javaPractice.entity
   configuration:
     map-underscore-to-camel-case: true
 
