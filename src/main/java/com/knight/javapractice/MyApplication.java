@@ -7,11 +7,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableAsync
 @SpringBootApplication
-@MapperScan(basePackages = { "com.knight.javaPractice.mapper" })
+@MapperScan(basePackages = {"com.knight.javaPractice.mapper"})
 public class MyApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MyApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
 
 }

@@ -8,14 +8,14 @@ import org.springframework.data.domain.Pageable;
 
 public interface UserService {
 
-  List<User> findAll();
+    List<User> findAll();
 
-  User selectById(Long id);
+    User selectById(Long id);
 
-  int saveUser(User user);
+    int saveUser(User user);
 
-  int deleteById(Long id);
+    int deleteById(Long id);
 
-  Page<User> findByCondition(Integer page, Integer size, String sort, String username, String phone, String email);
+    Page<User> findByCondition(Integer page, Integer size, String sort, String username, String phone, String email);
 
 }

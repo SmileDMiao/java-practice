@@ -15,10 +15,10 @@ import lombok.*;
 @Table(name = "role_permissions")
 public class RolePermission extends BaseModel {
 
-    @Column(name = "role_id", insertable=false,updatable=false)
+    @Column(name = "role_id", insertable = false, updatable = false)
     private Long roleId;
 
-    @Column(name = "permission_id", insertable=false,updatable=false)
+    @Column(name = "permission_id", insertable = false, updatable = false)
     private Long permissionId;
 
     @OneToOne(targetEntity = Role.class, cascade = CascadeType.ALL)

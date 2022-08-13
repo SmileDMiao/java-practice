@@ -29,22 +29,19 @@ public class JpaController {
     @GetMapping("/search")
     public ResultData<String> findAll() {
 
-//        userRepository.findAll();
+        userRepository.findAll();
 
-//        userRepository.findById(1L);
+        userRepository.findById(1L);
 
-//        userRepository.findByUsername("Hello");
+        userRepository.findByUsername("Hello");
 
-//        userRepository.findByUsernameLike("Hello");
-//
-//        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
-//        Pageable pageable = PageRequest.of(1, 10, sort);
-//
-//
-//        userRepository.findAll(pageable);
+        userRepository.findByUsernameLike("Hello");
+
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+        Pageable pageable = PageRequest.of(1, 10, sort);
+        userRepository.findAll(pageable);
 
         userService.findByCondition(1, 10, "createdAt", "malzahar", "111", "123131");
-
 
         return ResultData.success("OK");
     }

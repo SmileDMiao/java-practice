@@ -5,7 +5,6 @@ import java.util.List;
 
 import cn.hutool.core.util.StrUtil;
 import com.knight.javaPractice.repository.UserRepository;
-import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import com.knight.javaPractice.entity.User;
 import com.knight.javaPractice.mapper.UserMapper;
 import com.knight.javaPractice.service.UserService;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
 
