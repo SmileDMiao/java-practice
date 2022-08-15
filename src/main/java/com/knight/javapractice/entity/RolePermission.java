@@ -1,16 +1,18 @@
 package com.knight.javaPractice.entity;
 
-import javax.persistence.*;
-
 import com.knight.javaPractice.entity.base.BaseModel;
-
 import lombok.*;
+import org.hibernate.Hibernate;
 
-@EqualsAndHashCode(callSuper = true)
+import javax.persistence.*;
+import java.util.Objects;
+
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "role_permissions")
 public class RolePermission extends BaseModel {
@@ -28,4 +30,17 @@ public class RolePermission extends BaseModel {
     @OneToOne(targetEntity = Permission.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "permission_id", referencedColumnName = "id")
     private Permission permission;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        RolePermission that = (RolePermission) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

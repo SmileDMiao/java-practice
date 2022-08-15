@@ -1,17 +1,17 @@
 package com.knight.javaPractice.entity;
 
-import javax.persistence.*;
-
 import com.knight.javaPractice.entity.base.BaseModel;
-
 import lombok.*;
+import org.hibernate.Hibernate;
 
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 @Table(name = "roles")
@@ -22,4 +22,16 @@ public class Role extends BaseModel {
 
     private String description;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Role role = (Role) o;
+        return getId() != null && Objects.equals(getId(), role.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

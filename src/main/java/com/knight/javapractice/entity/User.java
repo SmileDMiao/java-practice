@@ -1,22 +1,22 @@
 package com.knight.javaPractice.entity;
 
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.knight.javaPractice.entity.base.BaseModel;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
+import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.knight.javaPractice.entity.base.BaseModel;
-
-import lombok.*;
-
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
@@ -39,6 +39,7 @@ public class User extends BaseModel {
     @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
     @ManyToOne(targetEntity = Role.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @ToString.Exclude
     private Role role;
 
     @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
@@ -48,6 +49,19 @@ public class User extends BaseModel {
             joinColumns = @JoinColumn(name = "id", referencedColumnName = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "id")
     )
+    @ToString.Exclude
     Set<Permission> permissions;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return getId() != null && Objects.equals(getId(), user.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

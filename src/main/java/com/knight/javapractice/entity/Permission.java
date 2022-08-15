@@ -1,17 +1,19 @@
 package com.knight.javaPractice.entity;
 
+import com.knight.javaPractice.entity.base.BaseModel;
+import lombok.*;
+import org.hibernate.Hibernate;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Objects;
 
-import com.knight.javaPractice.entity.base.BaseModel;
-
-import lombok.*;
-
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "permissions")
 public class Permission extends BaseModel {
@@ -28,4 +30,16 @@ public class Permission extends BaseModel {
 
     private Long parentId;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Permission that = (Permission) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
