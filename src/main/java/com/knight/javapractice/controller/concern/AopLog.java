@@ -91,7 +91,7 @@ public class AopLog {
             log.warn("{}方法参数名和参数值数量不一致", methodSignature.getName());
             return Collections.emptyMap();
         }
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         for (int i = 0; i < names.length; i++) {
             map.put(names[i], args[i]);
         }

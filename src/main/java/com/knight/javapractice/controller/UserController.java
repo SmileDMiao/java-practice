@@ -1,6 +1,5 @@
 package com.knight.javaPractice.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,15 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.knight.javaPractice.entity.User;
 import com.knight.javaPractice.helper.ResultData;
-import com.knight.javaPractice.repository.UserRepository;
 import com.knight.javaPractice.service.UserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping()
     public ResultData<List<User>> findAll() {

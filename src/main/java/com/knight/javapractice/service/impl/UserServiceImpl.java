@@ -2,6 +2,7 @@ package com.knight.javaPractice.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import cn.hutool.core.util.StrUtil;
 import com.knight.javaPractice.repository.UserRepository;
@@ -20,11 +21,16 @@ import javax.persistence.criteria.Predicate;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
-    @Autowired
-    private UserMapper userMapper;
+
+    private  final UserMapper userMapper;
+
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public UserServiceImpl(UserMapper userMapper, UserRepository userRepository) {
+        this.userMapper = userMapper;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> findAll() {
@@ -47,12 +53,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> jpaFindAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public Optional<User> jpaFindById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public List<User> jpaFindByUserName(String userName){
+        return userRepository.findByUsername(userName);
+    }
+
+    public List<User> jpaFindByUserNameLike(String userName){
+        return userRepository.findByUsernameLike(userName);
+    }
+
+    // Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+    // Pageable pageable = PageRequest.of(1, 10, sort);
+    // userRepository.findAll(pageable);
+    // UserService.findByCondition(1, 10, "createdAt", "Hello", "111", "123131");
+    @Override
     public Page<User> findByCondition(Integer page, Integer size, String sort_name, String username, String phone, String email) {
         Sort sort = Sort.by(Sort.Direction.DESC, sort_name);
         Pageable pageable = PageRequest.of(1, 10, sort);
 
         return userRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<Predicate>();
+            List<Predicate> predicates = new ArrayList<>();
 
             if (!StrUtil.hasBlank(username)) {
                 predicates.add(criteriaBuilder.equal(root.get("username"), username));
@@ -66,7 +95,7 @@ public class UserServiceImpl implements UserService {
                 predicates.add(criteriaBuilder.equal(root.get("email"), email));
             }
 
-            return criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
+            return criteriaQuery.where(predicates.toArray(new Predicate[0])).getRestriction();
         }, pageable);
     }
 }

@@ -1,7 +1,5 @@
 package com.knight.javaPractice.helper;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,7 +11,7 @@ public class GlobalExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResultData<String> validationError(HttpServletRequest req, MethodArgumentNotValidException e) {
+    public ResultData<String> validationError(MethodArgumentNotValidException e) {
         // 拼接错误
         StringBuilder detailMessage = new StringBuilder();
         for (ObjectError objectError : e.getAllErrors()) {
@@ -29,7 +27,7 @@ public class GlobalExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public ResultData<String> exceptionHandler(HttpServletRequest req, Exception e) {
+    public ResultData<String> exceptionHandler(Exception e) {
         return ResultData.fail(500, e.getMessage());
     }
 }

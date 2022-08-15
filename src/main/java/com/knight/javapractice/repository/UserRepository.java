@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
 
-    public List<User> findByUsername(String name);
+    List<User> findByUsername(String name);
 
-    public List<User> findByUsernameLike(String name);
+    List<User> findByUsernameLike(String name);
 
 }
