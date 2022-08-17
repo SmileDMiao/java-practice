@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import lombok.Data;
 
+// 接口统一返回格式
 @Data
 public class ResultData<T> implements Serializable {
 

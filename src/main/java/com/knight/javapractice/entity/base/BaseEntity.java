@@ -18,7 +18,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public abstract class BaseModel implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +40,8 @@ public abstract class BaseModel implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        BaseModel baseModel = (BaseModel) o;
-        return id != null && Objects.equals(id, baseModel.id);
+        BaseEntity baseEntity = (BaseEntity) o;
+        return id != null && Objects.equals(id, baseEntity.id);
     }
 
     @Override

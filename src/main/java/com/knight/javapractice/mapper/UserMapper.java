@@ -13,10 +13,8 @@ import com.knight.javaPractice.entity.User;
 @Component
 public interface UserMapper {
 
-    @Select("SELECT * FROM users")
     List<User> findAll();
 
-    @Select("SELECT * FROM users WHERE id = #{id}")
     User selectById(@Param("id") Long id);
 
     int saveUser(@Param("user") User user);

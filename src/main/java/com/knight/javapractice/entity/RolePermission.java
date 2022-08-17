@@ -1,6 +1,6 @@
 package com.knight.javaPractice.entity;
 
-import com.knight.javaPractice.entity.base.BaseModel;
+import com.knight.javaPractice.entity.base.BaseEntity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -15,7 +15,7 @@ import java.util.Objects;
 @Builder
 @AllArgsConstructor
 @Table(name = "role_permissions")
-public class RolePermission extends BaseModel {
+public class RolePermission extends BaseEntity {
 
     @Column(name = "role_id", insertable = false, updatable = false)
     private Long roleId;

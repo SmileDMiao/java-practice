@@ -1,6 +1,6 @@
 package com.knight.javaPractice.entity;
 
-import com.knight.javaPractice.entity.base.BaseModel;
+import com.knight.javaPractice.entity.base.BaseEntity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -16,7 +16,7 @@ import java.util.Objects;
 @Builder
 @Table(name = "roles")
 @ToString(callSuper = true)
-public class Role extends BaseModel {
+public class Role extends BaseEntity {
 
     private String name;
 

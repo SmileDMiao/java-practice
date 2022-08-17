@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.knight.javaPractice.mapper.UserMapper">
-  <insert id="saveUser" keyProperty="id" useGeneratedKeys="true">
-		INSERT INTO `users`
-    (`username`, `password`)
-    VALUES (#{user.username},	#{user.password})
-  </insert>
 
-  <delete id="deleteById">
-		DELETE FROM `users`		WHERE `id` = #{id}
-  </delete>
+    <select id="findAll" resultType="User">
+        SELECT *
+        FROM users
+    </select>
+
+    <select id="selectById" resultType="User">
+        SELECT *
+        FROM users
+        WHERE id = #{id}
+    </select>
+
+    <insert id="saveUser" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO `users`
+            (`username`, `password`, `created_at`, `updated_at`)
+        VALUES (#{user.username}, #{user.password}, #{user.createdAt}, #{user.updatedAt})
+    </insert>
+
+    <delete id="deleteById">
+        DELETE
+        FROM `users`
+        WHERE `id` = #{id}
+    </delete>
 </mapper>

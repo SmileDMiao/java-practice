@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+// 全局异常处理
 @ControllerAdvice(basePackages = "com.knight.javaPractice.controller")
 public class GlobalExceptionHandler {
 
@@ -22,7 +23,7 @@ public class GlobalExceptionHandler {
             // 拼接内容到其中
             detailMessage.append(objectError.getDefaultMessage());
         }
-        return ResultData.fail(500, detailMessage.toString());
+        return ResultData.fail(400, detailMessage.toString());
     }
 
     @ResponseBody

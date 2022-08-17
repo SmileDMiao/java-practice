@@ -1,5 +1,6 @@
 package com.knight.javaPractice.helper;
 
+// API Code Message
 public enum ReturnCode {
 
     RC200(200, "OK"),
