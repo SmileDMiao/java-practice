@@ -19,7 +19,6 @@ spring:
       connection-timeout: 30000
 
   jpa:
-    show-sql: true
     hibernate:
       ddl-auto: validate
     properties:
@@ -45,16 +44,6 @@ spring:
         min-idle: 0
   cache:
     type: redis
-
-  flyway:
-    enabled: true
-    encoding: UTF-8
-    locations: classpath:db/migration
-    sql-migration-prefix: V
-    sql-migration-separator: __
-    sql-migration-suffixes: .sql
-    validate-on-migrate: true
-    baseline-on-migrate: true
 
   task:
     execution:

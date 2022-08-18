@@ -2,9 +2,10 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <property name="LOG_FILE_PATH" value="logs/logback/"/>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
+            <level>DEBUG</level>
         </filter>
         <encoder>
             <pattern>%date [%thread] %-5level [%logger{50}] %file:%line - %msg%n</pattern>
@@ -17,7 +18,7 @@
         <!--滚动策略，按照时间滚动 TimeBasedRollingPolicy-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
-            <FileNamePattern>logs/spring-boot-demo-logback/knight-%d{yyyy-MM-dd}-part-%i.log</FileNamePattern>
+            <FileNamePattern>${LOG_FILE_PATH}/knight-%d{yyyy-MM-dd}-part-%i.log</FileNamePattern>
             <!--只保留最近90天的日志-->
             <maxHistory>90</maxHistory>
             <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
@@ -27,9 +28,7 @@
                 <maxFileSize>2MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
-        <!--<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
-        <!--<maxFileSize>1KB</maxFileSize>-->
-        <!--</triggeringPolicy>-->
+
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
                 <timestamp>
@@ -40,15 +39,14 @@
                 <pattern>
                     <pattern>
                         {
-                            "app": "${springAppName}",
-                            "level": "%level",
-                            "trace": "%X{X-B3-TraceId:-}",
-                            "span": "%X{X-B3-SpanId:-}",
-                            "parent": "%X{X-B3-ParentSpanId:-}",
-                            "thread": "%thread",
-                            "class": "%logger{40}",
-                            "message": "%message",
-                            "stack_trace": "%exception{10}"
+                        "trace_id": "%X{TraceId}",
+                        "app": "${springAppName}",
+                        "level": "%level",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger",
+                        "message": "%message",
+                        "stack_trace": "%exception{20}"
                         }
                     </pattern>
                 </pattern>
@@ -56,12 +54,60 @@
         </encoder>
     </appender>
 
-    <logger name="com.knight.javaPractice.mapper" level="info" additivity="false">
-        <appender-ref ref="CONSOLE"/>
+    <appender name="API_FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志名称，如果没有File 属性，那么只会使用FileNamePattern的文件路径规则如果同时有<File>和<FileNamePattern>，那么当天日志是<File>，明天会自动把今天的日志改名为今天的日期。即，<File> 的日志都是当天的。-->
+        <!--滚动策略，按照时间滚动 TimeBasedRollingPolicy-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
+            <FileNamePattern>${LOG_FILE_PATH}/API-%d{yyyy-MM-dd}-part-%i.log</FileNamePattern>
+            <!--只保留最近90天的日志-->
+            <maxHistory>90</maxHistory>
+            <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
+            <!--<totalSizeCap>1GB</totalSizeCap>-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- maxFileSize:这是活动文件的大小，默认值是10MB,本篇设置为1KB，只是为了演示 -->
+                <maxFileSize>2MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <fieldName>timestamp</fieldName>
+                    <timeZone>UTC+8</timeZone>
+                    <pattern>yyyy-MM-dd HH:mm:ss</pattern>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "trace_id": "%X{TraceId}",
+                        "app": "${springAppName}",
+                        "level": "%level",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger",
+                        "message": "%message",
+                        "stack_trace": "%exception{20}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="OFF"/>
+    <logger name="org.hibernate" level="OFF"/>
+
+    <logger name="com.knight.javaPractice.controller.concern.AopLog" level="INFO">
+        <appender-ref ref="API_FILE_INFO"/>
     </logger>
 
-    <root level="info">
+    <logger name="p6spy" level="INFO">
+        <appender-ref ref="API_FILE_INFO"/>
+    </logger>
+
+
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE_INFO"/>
     </root>
 </configuration>

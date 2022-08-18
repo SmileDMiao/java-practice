@@ -1,7 +1,5 @@
 package com.knight.javaPractice.controller.concern;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,9 +56,6 @@ public class AopLog {
         UserAgent ua = UserAgentUtil.parse(userAgentStr);
 
         final Log l = Log.builder()
-                .threadId(Long.toString(Thread.currentThread().getId()))
-                .threadName(Thread.currentThread().getName())
-                .ip(getIp(request))
                 .url(request.getRequestURL().toString())
                 .classMethod(String.format("%s.%s", point.getSignature().getDeclaringTypeName(),
                         point.getSignature().getName()))
@@ -98,47 +93,11 @@ public class AopLog {
         return map;
     }
 
-    private static final String UNKNOWN = "unknown";
-
-    // 获取ip地址
-    public static String getIp(HttpServletRequest request) {
-        String ip = request.getHeader("x-forwarded-for");
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = request.getRemoteAddr();
-        }
-        String comma = ",";
-        String localhost = "127.0.0.1";
-        if (ip.contains(comma)) {
-            ip = ip.split(",")[0];
-        }
-        if (localhost.equals(ip)) {
-            // 获取本机真正的ip地址
-            try {
-                ip = InetAddress.getLocalHost().getHostAddress();
-            } catch (UnknownHostException e) {
-                log.error(e.getMessage(), e);
-            }
-        }
-        return ip;
-    }
-
     @Data
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     static class Log {
-        // 线程id
-        private String threadId;
-        // 线程名称
-        private String threadName;
-        // ip
-        private String ip;
         // url
         private String url;
         // http方法 GET POST PUT DELETE PATCH
