@@ -24,6 +24,8 @@ public interface UserService {
 
     List<User> jpaFindByUserNameLike(String userName);
 
-    Page<User> findByCondition(Integer page, Integer size, String sort, String username, String phone, String email);
+    Page<User> jpaFindByCondition(Integer page, Integer size, String sort, String username, String phone, String email);
+
+    Page<User> jpaFindByJoin(Integer page, Integer size, String sort, String username, String roleName);
 
 }

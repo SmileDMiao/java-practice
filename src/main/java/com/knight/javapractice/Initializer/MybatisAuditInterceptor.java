@@ -1,4 +1,4 @@
-package com.knight.javaPractice.Initializer;
+package com.knight.javaPractice.initializer;
 
 import java.util.Date;
 

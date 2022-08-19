@@ -1,4 +1,4 @@
-package com.knight.javaPractice.Initializer;
+package com.knight.javaPractice.initializer;
 
 import com.knight.javaPractice.controller.concern.TraceSetup;
 import org.springframework.boot.SpringBootConfiguration;

@@ -16,7 +16,7 @@
     </typeAliases>
 
     <plugins>
-        <plugin interceptor="com.knight.javaPractice.Initializer.MybatisAuditInterceptor">
+        <plugin interceptor="com.knight.javaPractice.initializer.MybatisAuditInterceptor">
         </plugin>
     </plugins>
 
