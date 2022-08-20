@@ -1,7 +1,7 @@
 package com.knight.javaPractice.controller;
 
 import com.knight.javaPractice.entity.User;
-import com.knight.javaPractice.helper.ResultData;
+import com.knight.javaPractice.controller.concern.ResultData;
 import com.knight.javaPractice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

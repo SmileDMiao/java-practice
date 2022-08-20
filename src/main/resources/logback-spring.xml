@@ -3,6 +3,7 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
     <property name="LOG_FILE_PATH" value="logs/logback/"/>
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
@@ -105,7 +106,6 @@
     <logger name="p6spy" level="INFO">
         <appender-ref ref="API_FILE_INFO"/>
     </logger>
-
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>

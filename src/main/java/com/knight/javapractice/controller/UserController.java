@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.knight.javaPractice.entity.User;
-import com.knight.javaPractice.helper.ResultData;
+import com.knight.javaPractice.controller.concern.ResultData;
 import com.knight.javaPractice.service.UserService;
 
 @RestController

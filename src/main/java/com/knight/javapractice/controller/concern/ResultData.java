@@ -1,4 +1,4 @@
-package com.knight.javaPractice.helper;
+package com.knight.javaPractice.controller.concern;
 
 import java.io.Serializable;
 

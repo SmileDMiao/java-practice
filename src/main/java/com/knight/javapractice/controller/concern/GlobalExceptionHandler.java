@@ -1,4 +1,4 @@
-package com.knight.javaPractice.helper;
+package com.knight.javaPractice.controller.concern;
 
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
