@@ -13,11 +13,10 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-
 public class PermissionSecurityFilter extends AbstractSecurityInterceptor implements Filter {
 
     @Autowired
-    private PermissionSecurityMetadataSource dynamicSecurityMetadataSource;
+    private PermissionSecurityMetadataSource permissionSecurityMetadataSource;
     @Autowired
     private IgnoreUrlConfig ignoreUrlConfig;
 
@@ -69,7 +68,7 @@ public class PermissionSecurityFilter extends AbstractSecurityInterceptor implem
 
     @Override
     public SecurityMetadataSource obtainSecurityMetadataSource() {
-        return dynamicSecurityMetadataSource;
+        return permissionSecurityMetadataSource;
     }
 
 }
