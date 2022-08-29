@@ -61,6 +61,20 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
+jwt:
+  tokenHeader: Authorization
+  secret: personal-java-practice
+  expiration: 604800
+  tokenHead: 'Bearer '
+
+secure:
+  ignored:
+    urls:
+      - /actuator/**
+      - /druid/**
+      - /users/login
+      - /users/create
+
 management:
   endpoint:
     health:

@@ -16,6 +16,8 @@ public interface UserMapper {
 
     User selectById(@Param("id") Long id);
 
+    User selectByUsername(@Param("username") String username);
+
     int saveUser(@Param("user") User user);
 
     int deleteById(@Param("id") Long id);

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/jpa")
 
@@ -24,7 +22,7 @@ public class JpaController {
     }
 
     @GetMapping("/search")
-    public ResultData<List<User>> findAll() {
+    public ResultData<String> findAll() {
         userService.jpaFindAll();
 
         userService.jpaFindById(1L);
@@ -34,7 +32,8 @@ public class JpaController {
         userService.jpaFindByUserNameLike("Hello");
 
         Page<User> users = userService.jpaFindByJoin(1, 10, "createdAt", "malzahar", "aa");
+        users.getContent();
 
-        return ResultData.success(users.getContent());
+        return ResultData.success("OK");
     }
 }

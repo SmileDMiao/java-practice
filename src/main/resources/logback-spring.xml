@@ -107,7 +107,7 @@
         <appender-ref ref="API_FILE_INFO"/>
     </logger>
 
-    <root level="INFO">
+    <root level="debug">
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>

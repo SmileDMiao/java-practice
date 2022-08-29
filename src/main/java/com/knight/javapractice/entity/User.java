@@ -33,16 +33,19 @@ public class User extends BaseEntity {
     @NotBlank(message = "用户名不可为空")
     private String username;
 
-    @NotBlank(message = "密码不可为空")
     // @JsonIgnore
+    @NotBlank(message = "密码不可为空")
     private transient String password;
+
+    @Email
+    private String email;
+
+    @Column(name = "role_id", insertable = false, updatable = false)
+    private Long roleId;
 
     private String nickname;
 
     private String phone;
-
-    @Email
-    private String email;
 
     @JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
     @ManyToOne(targetEntity = Role.class, fetch = FetchType.LAZY)

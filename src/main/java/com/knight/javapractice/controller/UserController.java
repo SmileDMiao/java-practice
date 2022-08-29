@@ -1,11 +1,12 @@
 package com.knight.javaPractice.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.knight.javaPractice.entity.User;
+import com.knight.javaPractice.controller.payload.user.LoginRequest;
 import com.knight.javaPractice.controller.concern.ResultData;
 import com.knight.javaPractice.service.UserService;
 
@@ -29,6 +31,21 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("/login")
+    public ResultData<Map<String, String>> login(@RequestBody LoginRequest loginRequest) {
+        String token = userService.login(loginRequest);
+
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("token", token);
+
+        return ResultData.success(tokenMap);
+    }
+
+    @PostMapping("/logout")
+    public ResultData<String> logout() {
+        return ResultData.success("OK");
+    }
+
     @GetMapping()
     public ResultData<List<User>> findAll() {
         List<User> users;
@@ -39,7 +56,6 @@ public class UserController {
 
     @PostMapping()
     public ResultData<String> create(@Valid @RequestBody User user) {
-        user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
         userService.saveUser(user);
 
         return ResultData.success("OK");

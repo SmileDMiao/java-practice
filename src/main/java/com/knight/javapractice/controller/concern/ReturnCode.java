@@ -4,7 +4,11 @@ package com.knight.javaPractice.controller.concern;
 public enum ReturnCode {
 
     RC200(200, "OK"),
+
     RC400(400, "Bad Request"),
+
+    RC401(401, "Unauthorized"),
+
     RC500(500, "Internal Server Error");
 
     private final int code;
