@@ -28,8 +28,8 @@ public class CommonSecurityConfig {
     }
 
     @Bean
-    public RequestUnauthorized requestUnauthorized() {
-        return new RequestUnauthorized();
+    public RequestUnauthorizedHandler requestUnauthorizedHandler() {
+        return new RequestUnauthorizedHandler();
     }
 
     @Bean

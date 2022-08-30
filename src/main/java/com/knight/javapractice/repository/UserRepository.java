@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     @EntityGraph(value = "user.role")
     List<User> findByUsername(String name);
 
-    @Cacheable("userByName")
+    @Cacheable("userByName=86400")
     List<User> findByUsernameLike(String name);
 
 }

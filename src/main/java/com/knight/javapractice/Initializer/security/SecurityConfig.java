@@ -17,7 +17,7 @@ public class SecurityConfig {
 
     private final RequestAccessDeniedHandler requestAccessDeniedHandler;
 
-    private final RequestUnauthorized requestUnauthorized;
+    private final RequestUnauthorizedHandler requestUnauthorizedHandler;
 
     private final JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
@@ -25,12 +25,12 @@ public class SecurityConfig {
 
     public SecurityConfig(IgnoreUrlConfig ignoreUrlConfig,
                           RequestAccessDeniedHandler requestAccessDeniedHandler,
-                          RequestUnauthorized requestUnauthorized,
+                          RequestUnauthorizedHandler requestUnauthorizedHandler,
                           JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter,
                           PermissionSecurityFilter permissionSecurityFilter) {
         this.ignoreUrlConfig = ignoreUrlConfig;
         this.requestAccessDeniedHandler = requestAccessDeniedHandler;
-        this.requestUnauthorized = requestUnauthorized;
+        this.requestUnauthorizedHandler = requestUnauthorizedHandler;
         this.jwtAuthenticationTokenFilter = jwtAuthenticationTokenFilter;
         this.permissionSecurityFilter = permissionSecurityFilter;
     }
@@ -62,7 +62,7 @@ public class SecurityConfig {
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(requestAccessDeniedHandler)
-                .authenticationEntryPoint(requestUnauthorized)
+                .authenticationEntryPoint(requestUnauthorizedHandler)
                 .and()
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(permissionSecurityFilter, FilterSecurityInterceptor.class);

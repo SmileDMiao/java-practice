@@ -22,13 +22,7 @@ public class Permission extends BaseEntity {
 
     private String url;
 
-    private Integer type;
-
-    private String permission;
-
-    private String method;
-
-    private Long parentId;
+    private Integer sort;
 
     @Override
     public boolean equals(Object o) {

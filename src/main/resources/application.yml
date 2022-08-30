@@ -1,4 +1,4 @@
-debug: false
+debug: true
 
 spring:
   application:
@@ -9,6 +9,14 @@ spring:
     url: jdbc:mysql://localhost:3306/java
     username: root
     password: 123
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: SpringBootHikariCP
+      max-lifetime: 60000
+      connection-timeout: 30000
     druid:
       # 连接池初始化大小
       initial-size: 5
@@ -85,8 +93,8 @@ secure:
       - /actuator/**
       - /druid/**
       - /error
-      - /users/login
-      - /users/create
+      - /users/**
+      - /jpa/**
 
 management:
   endpoint:
@@ -96,3 +104,6 @@ management:
     web:
       exposure:
         include: '*'
+
+server:
+  shutdown: graceful
