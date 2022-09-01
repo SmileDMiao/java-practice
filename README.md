@@ -9,3 +9,4 @@
 | Validation      | 参数验证                                      |
 | Spring Security | JWT Token RBAC权限                          |
 | Redis           | 注解方式使用Redis 自定义过期时间                       |
+| I18N            | SpringBoot 多语言                            |

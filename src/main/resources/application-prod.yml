@@ -1,0 +1,50 @@
+spring:
+  # datasource
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/java
+    username: root
+    password: 123
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: SpringBootHikariCP
+      max-lifetime: 60000
+      connection-timeout: 30000
+    druid:
+      # 连接池初始化大小
+      initial-size: 5
+      # 最小空闲连接数
+      min-idle: 10
+      # 最大连接数
+      max-active: 20
+      web-stat-filter:
+        enabled: true
+        # 不统计这些请求数据
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      stat-view-servlet:
+        enabled: true
+        # 访问监控网页的登录用户名和密码
+        login-username: druid
+        login-password: druid
+
+  # devtools
+  devtools:
+    restart:
+      enabled: true
+
+  # redis
+  redis:
+    host: localhost
+    database: 0
+    port: 6379
+    password:
+    timeout: 1000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0

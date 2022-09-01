@@ -10,10 +10,12 @@ import java.util.Locale;
 @Configuration
 public class LocaleConfig {
 
+    // 默认中文
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
         localeResolver.setDefaultLocale(Locale.CHINA);
+
         return localeResolver;
     }
 }
